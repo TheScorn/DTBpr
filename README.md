@@ -23,3 +23,5 @@ uruchamiając skrypt.
 -napisać tą analizę i raport(w R ig bo inaczej nie wiem jak zrobić raport).
 
 -Dokumentacja to już nie powinien być problem
+
+test123
