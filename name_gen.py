@@ -7,7 +7,7 @@ def generate_person():
     Generuje krotkę z losowym imieniem i nazwiskiem losowej płci.
     Zwraca imie nazwisko i zmienną Sex która może przyjmować 0 dla mężczyzn i 1 dla kobiet
     '''
-    print(os.getcwd())
+
     os.chdir(os.path.dirname(os.path.abspath(__file__))) #zmieniamy directory na to z projektem
     os.chdir('names')
     
