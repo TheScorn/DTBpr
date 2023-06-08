@@ -6,6 +6,7 @@ def generate_person():
     '''
     Generuje krotkę z losowym imieniem i nazwiskiem losowej płci.
     Zwraca imie nazwisko i zmienną Sex która może przyjmować 0 dla mężczyzn i 1 dla kobiet
+    zwraca również email zrobiony z imienia i nazwiska
     '''
 
     os.chdir(os.path.dirname(os.path.abspath(__file__))) #zmieniamy directory na to z projektem
@@ -30,7 +31,7 @@ def generate_person():
         surname = f.readline()
         surname = surname[:-1]
         f.close()
-        return(name,surname)
+        
 
     else:
         #generowanie dla female
@@ -49,12 +50,23 @@ def generate_person():
         surname = f.readline()
         surname = surname[:-1]
         f.close()
-        return(name,surname,sex)
 
+    mails = ("gmail.com","interia.pl","gmail.com","wp.pl","gmail.com")
+    number_mail = random.randrange(0,5)
+    mail_ending = mails[number_mail]
+    swapped = bool(random.getrandbits(1))
+
+    if not swapped:
+        mail = name.lower() + "." + surname.lower() + "@" + mail_ending
+    else:
+        mail = surname.lower() + "." + name.lower() + "@"  + mail_ending
+    return(name,surname,mail,sex)
+        
+        
 if __name__ == "__main__":
     osoba = generate_person()
     print(osoba[0])
     print(osoba[1])
-
+    print(osoba[2])
     
 
