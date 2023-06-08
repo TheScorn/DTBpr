@@ -10,10 +10,17 @@ def create_games():
     potem wystarczy zaimportować i odpalić wszystkie na raz.
     """
     cs = con.cursor()
-    table = "CREATE TEMPORARY TABLE IF NOT EXISTS games(game_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,title VARCHAR(255) NOT NULL,year_published SMALLINT UNSIGNED NOT NULL,min_players TINYINT UNSIGNED NOT NULL,max_players TINYINT UNSIGNED NOT NULL,play_time TINYINT UNSIGNED NOT NULL COMMENT 'skala 1-10',min_age TINYINT UNSIGNED NOT NULL,users_rated FLOAT NOT NULL COMMENT 'skala 0-5',difficulty TINYINT UNSIGNED NOT NULL COMMENT 'skala 1-10',mechanics VARCHAR(250) DEFAULT NULL,type VARCHAR(60) DEFAULT NULL)"
+    table = "CREATE OR REPLACE TEMPORARY TABLE games(game_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,title VARCHAR(255) NOT NULL,year_published SMALLINT UNSIGNED NOT NULL,min_players TINYINT UNSIGNED NOT NULL,max_players TINYINT UNSIGNED NOT NULL,play_time TINYINT UNSIGNED NOT NULL COMMENT 'skala 1-10',min_age TINYINT UNSIGNED NOT NULL,users_rated FLOAT NOT NULL COMMENT 'skala 0-5',difficulty TINYINT UNSIGNED NOT NULL COMMENT 'skala 1-10',mechanics VARCHAR(250) DEFAULT NULL,type VARCHAR(60) DEFAULT NULL)"
     cs.execute(table)
     cs.fetchall()
-
+    
+    alter1 = "ALTER TABLE games ADD CONSTRAINT playtime_in_bounds CHECK (play_time >= 1 AND play_time <=10)"
+    alter2 = "ALTER TABLE games ADD CONSTRAINT difficulty_in_bounds CHECK (difficulty >= 1 AND difficulty <=10)"
+    alter3 = "ALTER TABLE games ADD CONSTRAINT users_rated_in_bounds CHECK (users_rated >= 0 AND users_rated <= 5)"
+    
+    cs.execute(alter1)
+    cs.execute(alter2)
+    cs.execute(alter3)
 
 if __name__ == "__main__":
     import mysql.connector
