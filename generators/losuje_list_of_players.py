@@ -17,3 +17,6 @@ def losuj_list_of_players(dane):
                 wynik.append([k,i+1,0])
     random.shuffle(wynik)
     return wynik
+
+if __name__ == "__main__":
+    pass
