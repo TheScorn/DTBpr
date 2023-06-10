@@ -9,18 +9,24 @@ import pandas as pd
 #żeby nie było problemu z datami których nie było
 #Zakładamy że sklep pracuje w weekendy
 
-def date_gen() -> str:
+def date_gen(start_date:str = "2014-01-01",s:int = 0,k:int = 3287) -> str:
     """
-    sklep działa od 201? stąd daty zaczynają się od 
-    201? (2016)
-
-    załóżmy że ostatnia data działania to 2022-12-31 
+    start_date:str data od której tworzymy przedział
+    deafaultowo 2014-01-01 jako pierwsza data od której działa sklep
+    s:int początek przedziału z którego losujemy
+    s = 0 oznacza że losujemy od start_date
+    defaultowo 0
+    
+    k:int ile dni zawiera przedział
+    defaultowo 3287 bo tyle jest dni do 2022-12-31 
+    
+    
     """
-    start_date = datetime.datetime.strptime("2016-01-01","%Y-%m-%d")
+    start_date = datetime.datetime.strptime(start_date,"%Y-%m-%d")
     #w kalkulatorze dat tyle dni jest między startem a końcem
     #pandas generuje listę możliwych dat
-    date_generated=pd.date_range(start_date, periods = 2557)
-    random_date = random.randrange(0,2558,1)
+    date_generated=pd.date_range(start_date, periods = k)
+    random_date = random.randrange(s,k,1)
     return(date_generated[random_date].strftime("%Y-%m-%d"))
     
 

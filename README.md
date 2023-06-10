@@ -1,27 +1,22 @@
 # DTBpr
 Repo na projekt z baz danych
 
+Założenia
 
-PLAN!!
+Zakładamy, że sklep działa od 2014-01-01 do 2022-12-30
+żeby nie pomylić się i nie wpisać daty z 2023 której jeszcze nie było
 
--Trzeba poszukać tego info o grach.
+Zakładamy, że ma jedną miejscówkę
 
-Musimy napisać kilka osobnych programów.
+Zakładamy na ten moment, że klienci mogą wpisać pseudonim gdy biorą udział w turnieju, stąd nie są w relacji z graczami.
 
--Trzeba się trzymać tego żeby baza była znormalizowana cały czas.
-Podobno to ważne i będzie na wykładzie.(To znaczy ważna o tyle,
-że podobno będą za to obcinać punkty z dokumentacji.)
 
--trzeba zrobić ten plan bazy, najlepiej w ERD editorze żeby sc zrobić
-i wjebać do dokumentacji.
 
--zrobić generator tych danych losowych z jakichś plików.
 
--zapisać obie rzeczy w jakimś pythonie, żeby dało się stworzyć baze
-uruchamiając skrypt.
 
--napisać tą analizę i raport(w R ig bo inaczej nie wiem jak zrobić raport).
 
--Dokumentacja to już nie powinien być problem
 
-test123
+
+
+
+
