@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def create_customers():
+def create_customers(con):
     """
     funkcja tworząca tabelę customers
     ma dodane player_id gdy klient jest jednocześnie graczem
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         print("connected")
     else:
         print("connection error")
-    create_customers()
+    create_customers(con)
     ##########
     #test czy działa wstawiając wartość i odczytując
     cs = con.cursor()

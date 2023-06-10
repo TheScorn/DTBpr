@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def create_games():
+def create_games(con):
     """
     funkcja tworząca tabelę games,
     na ten moment temporary
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         print("connected")
     else:
         print("connection error")
-    create_games()
+    create_games(con)
     ##########
     #test czy działa wstawiając wartość i odczytując
     cs = con.cursor()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def create_tournaments():
+def create_tournaments(con):
     """
     funkcja tworząca tabelę customers,
     na ten moment temporary
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         print("connected")
     else:
         print("connection error")
-    create_tournaments()
+    create_tournaments(con)
     ##########
     #test czy działa wstawiając wartość i odczytując
     cs = con.cursor()
@@ -42,9 +42,7 @@ if __name__ == "__main__":
 
     
     date1 = datetime.datetime(2021,6,14)
-    print(date1)
     date1_formatted = date1.strftime('%Y-%m-%d')
-    print(date1)
     date2 = datetime.datetime(2021,6,23)
     date2_formatted = date2.strftime('%Y-%m-%d')
 

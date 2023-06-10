@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def create_tournament_player():
+def create_tournament_player(con):
     """
     funkcja tworząca tabelę tournament_player
     tabela służy do organizowania info o tym
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         print("connected")
     else:
         print("connection error")
-    create_tournament_player()
+    create_tournament_player(con)
     ##########
     #test czy działa wstawiając wartość i odczytując
     cs = con.cursor()

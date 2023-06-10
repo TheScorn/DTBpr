@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def create_staff():
+def create_staff(con):
     """
     funkcja tworząca tabelę customers,
     na ten moment temporary
@@ -10,7 +10,7 @@ def create_staff():
     potem wystarczy zaimportować i odpalić wszystkie na raz.
     """
     cs = con.cursor()
-    table = "CREATE OR REPLACE TEMPORARY TABLE staff(staff_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,first_name VARCHAR(40) NOT NULL,last_name VARCHAR(45) NOT NULL,salary SMALLINT NOT NULL) COMMENT 'lista pracowników'"
+    table = "CREATE OR REPLACE TEMPORARY TABLE staff(staff_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,first_name VARCHAR(40) NOT NULL,last_name VARCHAR(45) NOT NULL,salary FLOAT UNSIGNED NOT NULL) COMMENT 'lista pracowników'"
 
     cs.execute(table)
     cs.fetchall()
@@ -28,14 +28,14 @@ if __name__ == "__main__":
         print("connected")
     else:
         print("connection error")
-    create_staff()
+    create_staff(con)
     ##########
     #test czy działa wstawiając wartość i odczytując
     cs = con.cursor()
     insert = "INSERT INTO staff (first_name, last_name, salary) VALUES (%s, %s, %s)"
     
 
-    val = ("andrzej","ziomal",300)
+    val = ("andrzej","ziomal",640)
     cs.execute(insert,val)
     con.commit()
     cs.fetchall()

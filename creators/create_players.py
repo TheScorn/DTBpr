@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def create_players():
+def create_players(con):
     """
     tworzy tabelę z info o graczach turniejów
     gracze są oddzielnym bytem od klientów sklepu
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         print("connected")
     else:
         print("connection error")
-    create_players()
+    create_players(con)
     ##########
     #test czy działa wstawiając wartość i odczytując
     cs = con.cursor()

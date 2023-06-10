@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def create_payment():
+def create_payment(con):
     """
     funkcja tworząca tabelę customers,
     na ten moment temporary
@@ -30,7 +30,7 @@ if __name__ == "__main__":
         print("connected")
     else:
         print("connection error")
-    create_payment()
+    create_payment(con)
     ##########
     #test czy działa wstawiając wartość i odczytując
     cs = con.cursor()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def create_inventory():
+def create_inventory(con):
     """
     funkcja tworząca tabelę customers,
     na ten moment temporary
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     else:
         print("connection error")
 
-    create_inventory()
+    create_inventory(con)
     
     ##########
     #test czy działa wstawiając wartość i odczytując
