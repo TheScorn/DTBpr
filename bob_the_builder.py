@@ -10,6 +10,7 @@ from creators.create_rental import create_rental
 from creators.create_payment import create_payment
 from creators.create_players import create_players
 from creators.create_tournament_player import create_tournament_player
+from creators.alter_table import alter_table
 
 def bob_the_builder():
     """
@@ -37,6 +38,7 @@ def bob_the_builder():
     create_payment(con)
     create_players(con)
     create_tournament_player(con)
+    alter_table(con)
 
     con.close()
 
