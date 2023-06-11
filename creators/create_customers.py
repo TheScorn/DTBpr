@@ -2,12 +2,11 @@
 
 def create_customers(con):
     """
-    funkcja tworząca tabelę customers
-    ma dodane player_id gdy klient jest jednocześnie graczem
-    na razie w trybie temporary
+    funkcja create customers
+    buduje lub podmienia tabelę customers
     """
     cs = con.cursor()
-    table = "CREATE OR REPLACE TEMPORARY TABLE customers(customer_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,first_name VARCHAR(45) NOT NULL,last_name VARCHAR(45) NOT NULL,email VARCHAR(50),address varchar(50) NOT NULL,city VARCHAR(50) NOT NULL,player_id SMALLINT UNSIGNED DEFAULT NULL)"
+    table = "CREATE OR REPLACE TABLE customers(customer_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,first_name VARCHAR(45) NOT NULL,last_name VARCHAR(45) NOT NULL,email VARCHAR(50),address varchar(50) NOT NULL,city VARCHAR(50) NOT NULL,player_id SMALLINT UNSIGNED DEFAULT NULL)"
     cs.execute(table)
     cs.fetchall()
 

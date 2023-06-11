@@ -2,15 +2,10 @@
 
 def create_games(con):
     """
-    funkcja tworząca tabelę games,
-    na ten moment temporary
-    by nie usuwać danych na serwerze,
-    w ten sposób od szablonu można tworzyć i testować
-    wszystkie funkcje tworzące tabele,
-    potem wystarczy zaimportować i odpalić wszystkie na raz.
+    funkcja tworząca tabelę games
     """
     cs = con.cursor()
-    table = "CREATE OR REPLACE TEMPORARY TABLE games(game_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,title VARCHAR(255) NOT NULL,year_published SMALLINT UNSIGNED NOT NULL,min_players TINYINT UNSIGNED NOT NULL,max_players TINYINT UNSIGNED NOT NULL,play_time TINYINT UNSIGNED NOT NULL COMMENT 'skala 1-10',min_age TINYINT UNSIGNED NOT NULL,users_rated FLOAT NOT NULL COMMENT 'skala 0-5',difficulty TINYINT UNSIGNED NOT NULL COMMENT 'skala 1-10',mechanics VARCHAR(250) DEFAULT NULL,type VARCHAR(60) DEFAULT NULL)"
+    table = "CREATE OR REPLACE TABLE games(game_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,title VARCHAR(255) NOT NULL,year_published SMALLINT UNSIGNED NOT NULL,min_players TINYINT UNSIGNED NOT NULL,max_players TINYINT UNSIGNED NOT NULL,play_time TINYINT UNSIGNED NOT NULL COMMENT 'skala 1-10',min_age TINYINT UNSIGNED NOT NULL,users_rated FLOAT NOT NULL COMMENT 'skala 0-5',difficulty TINYINT UNSIGNED NOT NULL COMMENT 'skala 1-10',mechanics VARCHAR(250) DEFAULT NULL,type VARCHAR(60) DEFAULT NULL)"
     cs.execute(table)
     cs.fetchall()
     

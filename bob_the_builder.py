@@ -29,6 +29,12 @@ def bob_the_builder():
     if not con:
         raise Exception("connection error")
     
+    cs = con.cursor()
+    cs.execute("SET FOREIGN_KEY_CHECKS=0")
+    cs.fetchall()
+    
+    cs.execute("DROP TABLE IF EXISTS customers,inventory,tournaments,games,staff,rental,payment,players,tournament_player")
+
     create_customers(con)
     create_inventory(con)
     create_tournaments(con)
@@ -39,7 +45,8 @@ def bob_the_builder():
     create_players(con)
     create_tournament_player(con)
     alter_table(con)
-
+    
+    cs.execute("SET FOREIGN_KEY_CHECKS=1")
     con.close()
 
 if __name__ == "__main__":

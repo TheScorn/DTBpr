@@ -2,15 +2,10 @@
 
 def create_payment(con):
     """
-    funkcja tworząca tabelę customers,
-    na ten moment temporary
-    by nie usuwać danych na serwerze,
-    w ten sposób od szablonu można tworzyć i testować
-    wszystkie funkcje tworzące tabele,
-    potem wystarczy zaimportować i odpalić wszystkie na raz.
+    funkcja tworząca tabelę payment
     """
     cs = con.cursor()
-    table = "CREATE OR REPLACE TEMPORARY TABLE payment(payment_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,rental_id SMALLINT UNSIGNED DEFAULT NULL,customer_id SMALLINT UNSIGNED NOT NULL,staff_id SMALLINT UNSIGNED NOT NULL,payment_date DATE NOT NULL,amount FLOAT UNSIGNED NOT NULL)"
+    table = "CREATE OR REPLACE TABLE payment(payment_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,rental_id SMALLINT UNSIGNED DEFAULT NULL,customer_id SMALLINT UNSIGNED NOT NULL,staff_id SMALLINT UNSIGNED NOT NULL,payment_date DATE NOT NULL,amount FLOAT UNSIGNED NOT NULL)"
     cs.execute(table)
     cs.fetchall()
 

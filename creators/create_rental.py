@@ -2,15 +2,10 @@
 
 def create_rental(con):
     """
-    funkcja tworząca tabelę customers,
-    na ten moment temporary
-    by nie usuwać danych na serwerze,
-    w ten sposób od szablonu można tworzyć i testować
-    wszystkie funkcje tworzące tabele,
-    potem wystarczy zaimportować i odpalić wszystkie na raz.
+    funkcja tworząca tabelę rental
     """
     cs = con.cursor()
-    table = "CREATE OR REPLACE TEMPORARY TABLE rental(rental_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,inventory_id SMALLINT UNSIGNED NOT NULL,customer_id SMALLINT UNSIGNED NOT NULL,staff_id SMALLINT UNSIGNED NOT NULL,rental_date DATE NOT NULL,return_date DATE DEFAULT NULL)"
+    table = "CREATE OR REPLACE TABLE rental(rental_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,inventory_id SMALLINT UNSIGNED NOT NULL,customer_id SMALLINT UNSIGNED NOT NULL,staff_id SMALLINT UNSIGNED NOT NULL,rental_date DATE NOT NULL,return_date DATE DEFAULT NULL)"
     cs.execute(table)
     cs.fetchall()
     

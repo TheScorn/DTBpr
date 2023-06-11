@@ -2,15 +2,10 @@
 
 def create_staff(con):
     """
-    funkcja tworząca tabelę customers,
-    na ten moment temporary
-    by nie usuwać danych na serwerze,
-    w ten sposób od szablonu można tworzyć i testować
-    wszystkie funkcje tworzące tabele,
-    potem wystarczy zaimportować i odpalić wszystkie na raz.
+    funkcja tworząca tabelę staff
     """
     cs = con.cursor()
-    table = "CREATE OR REPLACE TEMPORARY TABLE staff(staff_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,first_name VARCHAR(40) NOT NULL,last_name VARCHAR(45) NOT NULL,salary FLOAT UNSIGNED NOT NULL) COMMENT 'lista pracowników'"
+    table = "CREATE OR REPLACE TABLE staff(staff_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,first_name VARCHAR(40) NOT NULL,last_name VARCHAR(45) NOT NULL,salary FLOAT UNSIGNED NOT NULL) COMMENT 'lista pracowników'"
 
     cs.execute(table)
     cs.fetchall()

@@ -7,7 +7,7 @@ def create_tournament_player(con):
     jaki zawodni brał udział w jakim turnieju
     """
     cs = con.cursor()
-    table = "CREATE OR REPLACE TEMPORARY TABLE tournament_player(tournament_id SMALLINT UNSIGNED,player_id SMALLINT UNSIGNED)"
+    table = "CREATE OR REPLACE TABLE tournament_player(tournament_id SMALLINT UNSIGNED,player_id SMALLINT UNSIGNED)"
     cs.execute(table)
     cs.fetchall()
 

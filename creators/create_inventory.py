@@ -2,15 +2,10 @@
 
 def create_inventory(con):
     """
-    funkcja tworząca tabelę customers,
-    na ten moment temporary
-    by nie usuwać danych na serwerze,
-    w ten sposób od szablonu można tworzyć i testować
-    wszystkie funkcje tworzące tabele,
-    potem wystarczy zaimportować i odpalić wszystkie na raz.
+    funkcja tworząca tabelę inventory
     """
     cs = con.cursor()
-    table = "CREATE OR REPLACE TEMPORARY TABLE inventory(inventory_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,game_id SMALLINT UNSIGNED NOT NULL) COMMENT 'magazynek'"
+    table = "CREATE OR REPLACE TABLE inventory(inventory_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,game_id SMALLINT UNSIGNED NOT NULL) COMMENT 'magazynek'"
     cs.execute(table)
     cs.fetchall()
 

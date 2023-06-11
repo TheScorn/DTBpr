@@ -3,11 +3,10 @@
 def create_players(con):
     """
     tworzy tabelę z info o graczach turniejów
-    gracze są oddzielnym bytem od klientów sklepu
-    od graczy wymagane jest imię, nazwisko i email.
+    każdy gracz jest też klientem
     """
     cs = con.cursor()
-    table = "CREATE OR REPLACE TEMPORARY TABLE players(customer_id SMALLINT UNSIGNED PRIMARY KEY,winner BOOL DEFAULT false)"
+    table = "CREATE OR REPLACE TABLE players(customer_id SMALLINT UNSIGNED PRIMARY KEY,winner BOOL DEFAULT false)"
     cs.execute(table)
     cs.fetchall()
 
