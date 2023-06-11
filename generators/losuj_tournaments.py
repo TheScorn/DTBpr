@@ -3,7 +3,7 @@ import csv
 import random
 from datetime import datetime, timedelta
 import math
-from losuje_games import generate_games
+#from losuje_games import generate_games
 
 def ile_spotkan(k):
     liczba_graczy_w_jednej_grze = k
@@ -46,5 +46,5 @@ def losuj_tournament(dane):
     return(lista,list_pomoc) #zwracam tylko jedną liste ta pomocnicza jest mi potrzebna do innej tabeli
 
 if __name__ == "__main__":
-    dane = generate_games(40)
+    #dane = generate_games(40)
     print(losuj_tournament(dane)[0])
