@@ -28,6 +28,10 @@ def alter_table(con):
 
     alter10 = "ALTER TABLE tournament_player ADD CONSTRAINT FK_tournaments_TO_tournaments FOREIGN KEY (tournament_id) REFERENCES tournaments (tournament_id),ADD CONSTRAINT KF_players_TO_players FOREIGN KEY (player_id) REFERENCES players (customer_id)"
 
+    alter11 =  "ALTER TABLE list_of_players ADD CONSTRAINT FK_customers_TO_list_of_players FOREIGN KEY (customer_id) REFERENCES customers (customer_id)"
+
+    alter12 = "ALTER TABLE list_of_players ADD CONSTRAINT FK_tournaments_TO_list_of_players FOREIGN KEY (tournament_id) REFERENCES tournaments (tournament_id)"
+
     cs.execute(alter1)
     cs.execute(alter2)
     cs.execute(alter3)
@@ -35,7 +39,8 @@ def alter_table(con):
     cs.execute(alter5)
     cs.execute(alter6)
     cs.execute(alter7)
-    cs.execute(alter8)
+    #cs.execute(alter8)
     cs.execute(alter9)
-    cs.execute(alter10)
-
+    #cs.execute(alter10)
+    cs.execute(alter12)
+    cs.execute(alter11)

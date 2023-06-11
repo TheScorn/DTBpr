@@ -90,3 +90,4 @@ def fill_tournaments(con,dane):
     for row in tournament:
         cs.execute(insert,row)
         con.commit()
+

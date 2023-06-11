@@ -10,7 +10,7 @@ def create_tournaments(con):
     cs.fetchall()
     
     alter1 = "ALTER TABLE tournaments ADD CONSTRAINT start_date_in_bounds CHECK (start_date <= '2022-12-31' AND start_date >= '2016-01-01')"
-    alter2 = "ALTER TABLE tournaments ADD CONSTRAINT end_date_in_bounds CHECK (DATE(end_date) > DATE(start_date))"
+    alter2 = "ALTER TABLE tournaments ADD CONSTRAINT end_date_in_bounds CHECK (DATE(end_date) >= DATE(start_date))"
     cs.execute(alter1)
     cs.execute(alter2)
     

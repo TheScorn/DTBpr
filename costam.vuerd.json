@@ -19,7 +19,7 @@
     },
     "database": "MySQL",
     "databaseName": "biblioteka",
-    "canvasType": "ERD",
+    "canvasType": "@vuerd/builtin-sql-ddl",
     "language": "GraphQL",
     "tableCase": "pascalCase",
     "columnCase": "camelCase",
@@ -143,7 +143,7 @@
           "active": false,
           "left": 103.2618,
           "top": 365.3579,
-          "zIndex": 8,
+          "zIndex": 7,
           "widthName": 60,
           "widthComment": 103.87353515625
         },
@@ -435,7 +435,7 @@
           "active": false,
           "left": 873.4066,
           "top": 1665.7219,
-          "zIndex": 9,
+          "zIndex": 8,
           "widthName": 60,
           "widthComment": 120
         },
@@ -566,7 +566,7 @@
           "active": false,
           "left": 1594.6073,
           "top": 1746.9475,
-          "zIndex": 7,
+          "zIndex": 6,
           "widthName": 74.26171875,
           "widthComment": 84.3671875
         },
@@ -651,7 +651,7 @@
           "active": false,
           "left": 1584.3184,
           "top": 229.0342,
-          "zIndex": 5,
+          "zIndex": 4,
           "widthName": 85.09716796875,
           "widthComment": 120
         },
@@ -1067,7 +1067,7 @@
           "active": false,
           "left": 984.3554,
           "top": 555.0909,
-          "zIndex": 6,
+          "zIndex": 5,
           "widthName": 60,
           "widthComment": 120
         },
