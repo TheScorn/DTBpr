@@ -31,9 +31,9 @@ def address_gen():
         if number >= 1 and number <= 60:
             token = True
     
-
-    return(street,number)
+    adres = street + " " + str(number)
+    return(adres)
 if __name__ == "__main__":
     adres = address_gen()
-    print(adres[0])
-    print(adres[1])
+    print(adres)
+    print(type(adres))

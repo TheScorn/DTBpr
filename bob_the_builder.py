@@ -11,6 +11,7 @@ from creators.create_payment import create_payment
 from creators.create_players import create_players
 from creators.create_tournament_player import create_tournament_player
 from creators.alter_table import alter_table
+from fill import fill_customers, fill_staff, fill_inventory
 
 def bob_the_builder():
     """
@@ -45,7 +46,9 @@ def bob_the_builder():
     create_players(con)
     create_tournament_player(con)
     alter_table(con)
-    
+    fill_customers(con,50)
+    fill_staff(con, 15)
+    fill_inventory(con, 10)
     cs.execute("SET FOREIGN_KEY_CHECKS=1")
     con.close()
 
