@@ -48,10 +48,10 @@ def losuj_daty(ile_razy):
     return(wynik)
 
 
-def losuj_rental(p, k):
+def losuj_rental(p, k, ile_gier):
     wynik = []
     liczba_wypozyczen = random.randint(p, k)
-    numerki = random.choices(range(1, 401), k=liczba_wypozyczen)
+    numerki = random.choices(range(1, ile_gier), k=liczba_wypozyczen)
     slownik = zlicz_powtorzenia(numerki)
     for klucz, wartosc in slownik.items():
         slownik[klucz] = spradz_czy_przekroj_pusty(losuj_daty(wartosc))
@@ -65,7 +65,7 @@ def losuj_rental(p, k):
     return wynik
 
 if __name__ == "__main__":
-    dane = losuj_rental(4000,12000)
+    dane = losuj_rental(4000,12000, 400)
     print(dane)
 
 
