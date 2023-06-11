@@ -31,8 +31,8 @@ def losuj_tournament(dane):
     for i in range(len(numerki)):
         while dane[numerki[i]][3] == 1 or dane[numerki[i]][3] == 0:
             numerki[i] = random.randint(1, 40)   
-    start_date = datetime(2023, 1, 1)
-    end_date = datetime(2023, 12, 31)
+    start_date = datetime(2020, 1, 1)
+    end_date = datetime(2022, 12, 31)
     for i in range(len(numerki)):
         lista.append([numerki[i]+1])
         s_date = start_date + timedelta(days=random.randint(0, (end_date - start_date).days)) + timedelta(hours = 20) + timedelta(minutes = random.randint(-10,10)) + timedelta(seconds= random.randint(0,59))

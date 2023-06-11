@@ -5,11 +5,11 @@ def create_tournaments(con):
     funkcja tworząca tabelę tournaments
     """
     cs = con.cursor()
-    table = "CREATE OR REPLACE TABLE tournaments(tournament_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,game_id SMALLINT UNSIGNED NOT NULL,start_date DATE NOT NULL,end_date DATE NOT NULL,prize FLOAT UNSIGNED DEFAULT NULL)"
+    table = "CREATE OR REPLACE TABLE tournaments(tournament_id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,game_id SMALLINT UNSIGNED NOT NULL,start_date TIMESTAMP NOT NULL,end_date TIMESTAMP NOT NULL,prize FLOAT UNSIGNED DEFAULT NULL)"
     cs.execute(table)
     cs.fetchall()
     
-    alter1 = "ALTER TABLE tournaments ADD CONSTRAINT start_date_in_bounds CHECK (start_date <= '2022-12-01' AND start_date >= '2014-01-01')"
+    alter1 = "ALTER TABLE tournaments ADD CONSTRAINT start_date_in_bounds CHECK (start_date <= '2022-12-31' AND start_date >= '2016-01-01')"
     alter2 = "ALTER TABLE tournaments ADD CONSTRAINT end_date_in_bounds CHECK (DATE(end_date) > DATE(start_date))"
     cs.execute(alter1)
     cs.execute(alter2)

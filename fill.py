@@ -3,6 +3,8 @@
 from generators.name_gen import generate_person
 from generators.address_gen import address_gen
 from generators.city_gen import generate_city
+from generators.losuje_games import generate_games
+from generators.losuj_tournaments import  losuj_tournament
 import random
 import math
 import numpy as np
@@ -34,7 +36,7 @@ def fill_staff(con,n:int)-> None:
     """
 
     cs = con.cursor()
-    sal = [3000,3100,3200,3250,3300,3400]
+    sal = [3490,3500,3550,3600,3800,4000]
     insert = "INSERT INTO staff (first_name, last_name, email, address, city, salary) VALUES (%s,%s,%s,%s,%s,%s)"
 
     for i in  range(n):
@@ -51,6 +53,15 @@ def fill_staff(con,n:int)-> None:
         con.commit()
         cs.fetchall()
 
+def fill_games(con,n:int)->int:
+    gry = generate_games(n)
+    cs = con.cursor()
+    insert = "INSERT INTO games (title, year_published, min_players, max_players, play_time, min_age, users_rated, difficulty, mechanics, type) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    for row in gry:
+        cs.execute(insert,row)
+        con.commit()
+    return(n,gry)
+
 def fill_inventory(con,n:int)->int:
     """
     funkcja wypełnia tablelę inventory
@@ -58,7 +69,7 @@ def fill_inventory(con,n:int)->int:
     za n podstawiamy ilość gier które będą się znajdować w tabeli games
     funkcja zwraca całkowitą sumę gier które znajdują się w inwentarzu
     """
-
+    suma = 0
     cs  = con.cursor()
     insert = "INSERT INTO inventory (game_id) VALUES (%s)"
 
@@ -68,5 +79,14 @@ def fill_inventory(con,n:int)->int:
             val = [i]
             cs.execute(insert,val)
             con.commit()
+            suma += 1
             cs.fetchall()
+    return(suma)
 
+def fill_tournaments(con,dane):
+    cs = con.cursor()
+    insert = "INSERT INTO tournaments (game_id, start_date, end_date, prize) VALUES (%s, %s, %s, %s)"
+    tournament = losuj_tournament(dane)[0]
+    for row in tournament:
+        cs.execute(insert,row)
+        con.commit()
