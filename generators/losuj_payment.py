@@ -60,7 +60,7 @@ def losuj_do_kupna(dane):
 
 
 def znizka(dni):
-    return dni
+    return 200 - dni
 
 def losuj_payment(dane):
     wynik = []
