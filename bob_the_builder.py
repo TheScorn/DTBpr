@@ -12,7 +12,7 @@ from creators.create_players import create_players
 from creators.create_list_of_players import create_list_of_players
 from creators.create_tournament_player import create_tournament_player
 from creators.alter_table import alter_table
-from fill import fill_customers, fill_staff, fill_inventory, fill_games, fill_tournaments
+from fill import fill_customers, fill_staff, fill_inventory, fill_games, fill_tournaments, fill_list_of_players, fill_rental, fill_payment
 
 def bob_the_builder():
     """
@@ -53,8 +53,11 @@ def bob_the_builder():
     fill_customers(con,300)
     fill_staff(con, 15)
     games = fill_games(con, 40)
-    fill_inventory(con, games[0])
-    fill_tournaments(con, games[1])
+    inventory = fill_inventory(con, games[0])
+    tournaments = fill_tournaments(con, games[1])
+    fill_list_of_players(con, tournaments)
+    rental = fill_rental(con, inventory)
+    fill_payment(con, rental)
     cs.execute("SET FOREIGN_KEY_CHECKS=1")
     con.close()
 

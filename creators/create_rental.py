@@ -12,7 +12,7 @@ def create_rental(con):
     alter1 = "ALTER TABLE rental ADD CONSTRAINT rental_date_in_bounds CHECK (rental_date <= '2022-12-29' AND rental_date >= '2014-01-01')"
     alter2 = "ALTER TABLE rental ADD CONSTRAINT return_date_in_bounds CHECK (return_date >= rental_date)"
 
-    cs.execute(alter1)
+    #cs.execute(alter1)
     cs.execute(alter2)
     
 if __name__ == "__main__":

@@ -5,6 +5,9 @@ from generators.address_gen import address_gen
 from generators.city_gen import generate_city
 from generators.losuje_games import generate_games
 from generators.losuj_tournaments import  losuj_tournament
+from generators.losuje_list_of_players import losuj_list_of_players
+from generators.losuj_rental import losuj_rental
+from generators.losuj_payment import losuj_payment
 import random
 import math
 import numpy as np
@@ -86,8 +89,34 @@ def fill_inventory(con,n:int)->int:
 def fill_tournaments(con,dane):
     cs = con.cursor()
     insert = "INSERT INTO tournaments (game_id, start_date, end_date, prize) VALUES (%s, %s, %s, %s)"
-    tournament = losuj_tournament(dane)[0]
-    for row in tournament:
+    tournament = losuj_tournament(dane)
+    for row in tournament[0]:
+        cs.execute(insert,row)
+        con.commit()
+    return tournament[1]
+
+def fill_list_of_players(con, dane):
+    cs = con.cursor()
+    insert = "INSERT INTO list_of_players (customer_id, tournament_id, place) VALUES (%s, %s, %s)"
+    list_of_players = losuj_list_of_players(dane)
+    for row in list_of_players:
         cs.execute(insert,row)
         con.commit()
 
+
+def fill_rental(con, dane):
+    cs = con.cursor()
+    insert = "INSERT INTO rental (inventory_id, customer_id, staff_id, rental_date, return_date) VALUES (%s, %s, %s, %s, %s)"
+    rental = losuj_rental(200,400, dane)
+    for row in rental:
+        cs.execute(insert,row)
+        con.commit()
+    return rental
+
+def fill_payment(con, dane):
+    cs = con.cursor()
+    insert = "INSERT INTO payment (rental_id_or_last_rental_id, customer_id, staff_id, payment_date, amount) VALUES (%s, %s, %s, %s, %s)"
+    payment = losuj_payment(dane)
+    for row in payment:
+        cs.execute(insert,row)
+        con.commit()

@@ -40,7 +40,7 @@ def alter_table(con):
     cs.execute(alter6)
     cs.execute(alter7)
     #cs.execute(alter8)
-    cs.execute(alter9)
+    #cs.execute(alter9)
     #cs.execute(alter10)
     cs.execute(alter12)
     cs.execute(alter11)

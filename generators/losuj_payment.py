@@ -2,11 +2,10 @@
 import math
 from scipy.stats import arcsine
 import numpy as np
-from losuj_rental import losuj_rental
 import random
 from datetime import datetime, timedelta
+#from losuj_rental import losuj_rental
 
-dane = losuj_rental(1500,2000)
 
 def last_rental_id(dane, wartosc):
     ostania_data = datetime(2000, 1, 1).date()
@@ -51,7 +50,7 @@ def losuj_do_kupna(dane):
     posortowana_lista = sorted(lista)
     a = min(posortowana_lista)
     b = max(posortowana_lista)
-    sample = arcsine.rvs(a, b, size = math.floor(0.3 * len(posortowana_lista)))
+    sample = arcsine.rvs(a, b, size = math.floor(0.7 * len(posortowana_lista)))
     for x in sample:
         do_kupna.append(znajdz_najblizsza_wartosc(posortowana_lista, x))
     for x in do_kupna:
@@ -61,7 +60,7 @@ def losuj_do_kupna(dane):
 
 
 def znizka(dni):
-    return dni 
+    return dni
 
 def losuj_payment(dane):
     wynik = []
@@ -76,15 +75,21 @@ def losuj_payment(dane):
             pomoc = last_rental_id(dane, krok[1])
             if random.randint(0, 1) == 1:
                 c = pomoc[1]
+                b = krok[2]
             else:
                 c = pomoc[1] + timedelta(days = random.randint(1, 50))
-            krok[5] = znizka(dni[krok[1]])
-            wynik.append([f"last rental_id {pomoc[0]}",random.randint(1, 301),random.randint(1, 5),c,znizka(dni[krok[1]])])
+                b = random.randint(1, 300)
+            wynik.append([f"last rental_id {pomoc[0]}",b,random.randint(1, 5),c,znizka(dni[krok[1]])])
             numerki.remove(krok[1])
+            krok.remove(krok[1])
         elif not isinstance(krok[0], int):
-            pass 
-        krok.remove(krok[1])
+            pass
+        else:
+            krok.remove(krok[1])         
     return(wynik)
 
+#dane = losuj_rental(400, 600, 400)
+#print(losuj_payment(dane))
+
 if __name__ == "__main__":
-    print(losuj_payment(dane))
+    pass 
