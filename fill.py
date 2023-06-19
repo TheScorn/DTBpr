@@ -76,7 +76,7 @@ def fill_inventory(con,n:int)->int:
     cs  = con.cursor()
     insert = "INSERT INTO inventory (game_id) VALUES (%s)"
 
-    for i in range(n):
+    for i in range(1,n+1):
         number = abs(math.ceil(np.random.normal(3,6)))
         for j in range(number):
             val = [i]
