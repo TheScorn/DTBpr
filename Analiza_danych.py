@@ -30,7 +30,7 @@ def top_10_tournament_players(g_id):
                 df = pd.DataFrame(top_10,columns=["Game_title","First_name","Last_name","Num_of_wins"])
                 return df
         else:
-                print("No tournament for this game.")
+                print("Brak turniej dla danej gry.")
 
 def top5_selers_AND_rental():
         '''
@@ -47,9 +47,78 @@ def top5_selers_AND_rental():
         df_sold = pd.DataFrame(top_5_sold,columns=["Game Title", "Sum of solds amount"])
         return  df_rental,df_sold
 
+def days_rental():
+        '''
+        Funkcja tworzy wykres punktowy oraz pudełkowy czasów wynajmowania gier. [dni]
+        '''
+        
+        cs = con.cursor()
+        cs.execute("SELECT DATEDIFF(return_date,rental_date) as 'Liczba dni w wypożyczeniu' FROM rental ")
+        X = cs.fetchall()
+        plt.plot(X,'o')
+        plt.title("Wykres punktowy czasu wynajmu gry.")
+        plt.xlabel("ID_gry")
+        plt.ylabel("Czas wynajmu [dni].")
+        plt.show()
+        X_lista = list(itertools.chain(*X))
+        plt.boxplot(X_lista,vert=False)
+        plt.xlabel("Czas wynajmu [dni]")
+        plt.title("Wykres pudełkowy wynajmu gier.")
+        plt.show()
+
+def longest_tournament(tabela_top10=True,Wykres_sr=True):
+        '''
+        Funkcja tworzy tabelę 10 najdluższych turniejów,
+        oraz średni czas trwania turnieju danej gry.
+        '''
+        cs = con.cursor()
+        if tabela_top10==True:
+                cs.execute("SELECT games.game_id,games.title,TIMESTAMPDIFF(MINUTE,tournaments.start_date,tournaments.end_date) as 'Czas_trwania_turnieju[min]' from tournaments inner join games on tournaments.game_id=games.game_id ORDER BY TIMESTAMPDIFF(MINUTE,tournaments.start_date,tournaments.end_date) DESC LIMIT 10")
+                top_10=cs.fetchall()
+                print(pd.DataFrame(top_10,columns=["id_gry","Tytuł","czas trwania turnieju[min]"]),"\n")
+        
+        if Wykres_sr==True:        
+                cs.execute("SELECT games.game_id,games.title,sum(TIMESTAMPDIFF(MINUTE,tournaments.start_date,tournaments.end_date)) as 'Czas_trwania_turnieju[min]',count(*) from tournaments inner join games on tournaments.game_id=games.game_id GROUP BY games.title ORDER BY SUM(TIMESTAMPDIFF(MINUTE,tournaments.start_date,tournaments.end_date)) DESC")
+                X= cs.fetchall()
+                sr=[]
+                for i in range(len(X)):
+                        sr.append((X[i][0],round(X[i][2]/X[i][3],2)))
+                kategorie = [sr[i][0] for i in range(len(sr))]
+                wartosci = [sr[i][1] for i in range(len(sr))]
+                plt.bar(kategorie,wartosci)
+                plt.title("Wykres słupkowy średniego czasu turniejów")
+                plt.xlabel('Id gry')
+                plt.ylabel('Minuty')
+                plt.show()
+
+def top_10_clients(tab=True,wykres=True):
+        cs = con.cursor()
+        cs.execute("select payment.customer_id,customers.first_name,customers.last_name,sum(amount),count(*) from payment inner join customers on payment.customer_id=customers.customer_id GROUP by payment.customer_id ORDER by sum(amount) DESC")
+        X = cs.fetchall()
+
+        if tab==True:
+                top10=X[:10]
+                tabela=pd.DataFrame(top10,columns=["Id_klienta","Imię","Nazwisko","Suma","Ilość płatności"])
+                print(tabela)
+
+        if wykres == True:
+                sr=[]
+                for i in range(len(X)):
+                        sr.append((X[i][0],round(X[i][3]/X[i][4],2)))
+                kategorie = [sr[i][0] for i in range(len(sr))]
+                wartosci = [sr[i][1] for i in range(len(sr))]
+                plt.bar(kategorie,wartosci)
+                plt.title("Średnia wartość transakcji klienta")
+                plt.xlabel("Id klietna")
+                plt.ylabel("Kwota")
+                plt.show()
+                
+
 if __name__ == "__main__":
+        import itertools
         import mysql.connector
         import pandas as pd
+        import matplotlib.pyplot as plt
 
         con = mysql.connector.connect(
                 host = "giniewicz.it",
@@ -61,17 +130,22 @@ if __name__ == "__main__":
                 raise Exception("connection error")
         
         print("\n                 Employee of the month ")
-        print(staff_ranking())
+        print(staff_ranking(),"\n")
 
-        
         print("\n                 Top10 players")
-        print(top_10_tournament_players(1))
+        print(top_10_tournament_players(g_id=1),"\n")
         
         print("\n                  Top5 games earning by rental")
-        print(top5_selers_AND_rental()[0])
+        print(top5_selers_AND_rental()[0],"\n")
 
         print("\n                 Top 5 best-selling games")
-        print(top5_selers_AND_rental()[1])
+        print(top5_selers_AND_rental()[1],"\n")
 
+        #Najdluższy czas wynajmowania
+        days_rental()
+        #Najdłuższy oraz średni czas turnieju
+        longest_tournament()
+        #Top_10 najwięcej wydających klientów, oraz wykres średniej wszystkich transakcji.
+        top_10_clients()
         
         con.close()
