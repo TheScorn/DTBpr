@@ -36,14 +36,30 @@ Jako dialekt MySql użyty do komunikacji z bazą danych.
 Jako narzędzie do kontroli wersji i pracy w grupie.
 
 \section{Lista plików i opis zawartości}
-
+Projekt zawiera 3 skrypty w folderze głównym:
+\begin{itemize}
+\item \textit{bob\_the\_builder.py}, który odpowiada za tworzenie, lub resetowanie bazy danych. Podczas tworzenia bazy uruchamia funkcje znajdujące się w pliku \textit{fill.py}.
+\item \textit{drop\_all}, którym można usunąć wszystkie tabele z bazy danych.
+\item \textit{Analiza\_danych.py}, który analizuję bazę danych.
+\end{itemize}
+Oprócz tego w folderze głównym znajdują się foldery:
+\begin{itemize}
+\item \textit{creators}, który zawiera moduły napisane w pythonie służące do tworzenia tabel w bazie.
+\item \textit{generators}, który zawiera generatory losowych danych służące do uzupełniania danych w tabelach.
+\item \textit{dokumentacja}, który zawiera tą dokumentację oraz pliki poboczne służące do jej generowania.
+\end{itemize}
 \section{Instrukcja uruchamiania}
+By stowrzyć nową bazę i wypełnić ją danymi należy uruchomić plik \textit{bob\_the\_builder}(cały proces zajmuje niestety trochę czasu). By na podstawie danych znajdujących się obecnie w bazie wygenerować analizę należy uruchomić plik \textit{Analiza\_danych.py}. ...
 
 \section{Schemat projektu bazy danych}
+
+
 
 \section{Opis zależności funkcyjnych z wyjaśnieniem}
 
 \section{Uzasadnienie dotyczące EKNF}
 
 \section{Trudności podczas tworzenia projektu}
+Największą trudnością było dogadanie się jak powinien wyglądać schemat bazy.
+
 \end{document}
