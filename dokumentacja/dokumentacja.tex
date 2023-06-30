@@ -58,10 +58,39 @@ By stowrzyć nową bazę i wypełnić ją danymi należy uruchomić plik \textit
 \end{figure}
 
 \section{Opis zależności funkcyjnych z wyjaśnieniem}
+\subsection{Tabela \textit{customers}}
+Kluczem głównym tabeli jest \textit{customer\_id}.
 
+\subsection{Tabela \textit{games}}
+Kluczem głownym jest \textit{game\_id}.
+Na podstawie id każdej z gier generowana jest tabela \textit{inventory}.
+Korzystając z informacji o liczbie graczy i czasie gry z każdej z gier generowana jest tabela dotycząca turniejów.
+
+\subsection{Tabela \textit{inventory}}
+Kluczem głównym jest \textit{inventory\_id}. \textit{game\_id} jest kluczem obcym odnoszącym się do \textit{game\_id} z tabeli \textit{games}.
+
+\subsection{Tabela \textit{list\_of\_players}}
+Tabela działa według założenia, że każdy gracz jest wpisywany do systemu jako klient by uprości zapis danych.
+Tabela posiada dwa klucze główne będące jednocześnie kluczami obcymi \textit{customer\_id} oraz \textit{tournament\_id} łącząc tym samym informacje o zawodnikach i turniejach.
+
+\subsection{Tabela \textit{staff}}
+Kluczem głównym jest \textit{staff\_id}. Tabela nie posiada kluczy obcych.
+
+\subsection{Tabela \textit{rental}}
+\textit{rental\_id} jest kluczem głównym tabeli.
+Tabela posiada 3 klucze obce \textit{inventory\_id}, \textit{customer\_id} oraz \textit{staff\_id} odnoszące się do kluczy głównych tabel \textit{inventory}, \textit{customer}, \textit{staff}.
+
+\subsection{Tabela \textit{payment}}
+\textit{payment\_id} jest kluczem głównym tabeli.
+Tabela posiada klucze obce \textit{rental\_id}, \textit{customer\_id} i \textit{staff\_id}.
+
+\subsection{Tabela \textit{tournaments}}
+\textit{tournament\_id} jest kluczem głównym tabeli.
+Tabela posiada klcz obcy \textit{game\_id}. Dane w tabeli są generowane na podstawie gry, na której opraty jest dany turniej.
 
 
 \section{Uzasadnienie dotyczące EKNF}
+
 
 \section{Trudności podczas tworzenia projektu}
 Największą trudnością było dogadanie się jak powinien wyglądać schemat bazy. Trudno było się też zorientować jak
