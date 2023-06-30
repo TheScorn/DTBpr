@@ -1,4 +1,3 @@
-
 def staff_ranking(cs): 
         """
         Funkcja tworzy ranking pracowników dla każdego miesiąca w którym sklep prowadził działalność.
@@ -47,18 +46,12 @@ def days_rental(cs):
         '''
         Funkcja tworzy wykres punktowy oraz pudełkowy czasów wynajmowania gier. [dni]
         '''
+        import itertools
         cs.execute("SELECT DATEDIFF(return_date,rental_date) as 'Liczba dni w wypożyczeniu' FROM rental ")
         X = cs.fetchall()
-        plt.plot(X,'o')
-        plt.title("Wykres punktowy czasu wynajmu gry.")
-        plt.xlabel("ID_gry")
-        plt.ylabel("Czas wynajmu [dni].")
-        plt.show()
         X_lista = list(itertools.chain(*X))
-        plt.boxplot(X_lista,vert=False)
-        plt.xlabel("Czas wynajmu [dni]")
-        plt.title("Wykres pudełkowy wynajmu gier.")
-        plt.show()
+        return(X,X_lista)
+        
 
 def longest_tournament(cs):
         '''
@@ -78,28 +71,19 @@ def longest_tournament_plot(cs):
         kategorie = [sr[i][0] for i in range(len(sr))]
         wartosci = [sr[i][1] for i in range(len(sr))]
         return(kategorie,wartosci)
-def top_10_clients(tab=True,wykres=True):
-        cs = con.cursor()
+def top_10_clients(cs):
         cs.execute("select payment.customer_id,customers.first_name,customers.last_name,sum(amount),count(*) from payment inner join customers on payment.customer_id=customers.customer_id GROUP by payment.customer_id ORDER by sum(amount) DESC")
         X = cs.fetchall()
+        top10=X[:10]
+        sr=[]
+        for i in range(len(X)):
+                sr.append((X[i][0],round(X[i][3]/X[i][4],2)))
+        kategorie = [sr[i][0] for i in range(len(sr))]
+        wartosci = [sr[i][1] for i in range(len(sr))]
 
-        if tab==True:
-                top10=X[:10]
-                tabela=pd.DataFrame(top10,columns=["Id_klienta","Imię","Nazwisko","Suma","Ilość płatności"])
-                print(tabela)
-
-        if wykres == True:
-                sr=[]
-                for i in range(len(X)):
-                        sr.append((X[i][0],round(X[i][3]/X[i][4],2)))
-                kategorie = [sr[i][0] for i in range(len(sr))]
-                wartosci = [sr[i][1] for i in range(len(sr))]
-                plt.bar(kategorie,wartosci)
-                plt.title("Średnia wartość transakcji klienta")
-                plt.xlabel("Id klietna")
-                plt.ylabel("Kwota")
-                plt.show()
-                
+       
+        return top10,kategorie,wartosci
+        
 
 if __name__ == "__main__":
         import itertools
@@ -134,7 +118,15 @@ if __name__ == "__main__":
         print(df_sold,"\n")
 
         #Najdluższy czas wynajmowania
-        days_rental(cs)
+        plt.plot(days_rental(cs)[0],'o')
+        plt.title("Wykres punktowy czasu wynajmu gry.")
+        plt.xlabel("ID_gry")
+        plt.ylabel("Czas wynajmu [dni].")
+        plt.show()
+        plt.boxplot(days_rental(cs)[1],vert=False)
+        plt.xlabel("Czas wynajmu [dni]")
+        plt.title("Wykres pudełkowy wynajmu gier.")
+        plt.show()
         #Najdłuższy czas turnieju
         df=pd.DataFrame(longest_tournament(cs),columns=["id_gry","Tytuł","czas trwania turnieju[min]"])
         print(df,"\n")
@@ -147,6 +139,13 @@ if __name__ == "__main__":
         plt.show()
 
         #Top_10 najwięcej wydających klientów, oraz wykres średniej wszystkich transakcji.
-        top_10_clients()
+        
+        tabela=pd.DataFrame(top_10_clients(cs)[0],columns=["Id_klienta","Imię","Nazwisko","Suma","Ilość płatności"])
+        print(tabela)
+        plt.bar(top_10_clients(cs)[1],top_10_clients(cs)[2])
+        plt.title("Średnia wartość transakcji klienta")
+        plt.xlabel("Id klietna")
+        plt.ylabel("Kwota")
+        plt.show()
         
         con.close()
